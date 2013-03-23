@@ -9,16 +9,16 @@ This can be used for any purpose but there are no guarantees of its reliability
 How to use
 ------------
 
-from simplewebsocket import SimpleWebSocket
-
-def onRead(client, data, binary):
-	print "Data received:", data
+	from simplewebsocket import SimpleWebSocket
 	
-if __name__ == '__main__':
-	server = SimpleWebSocket(1020)
-	
-	server.onRead += onRead
-	server.start()
+	def onRead(client, data, binary):
+		print "Data received:", data
+		
+	if __name__ == '__main__':
+		server = SimpleWebSocket(1020)
+		
+		server.onRead += onRead
+		server.start()
 
 Simple doc
 ------------
