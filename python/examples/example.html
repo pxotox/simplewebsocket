@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Simple WebSocket Example</title>
+	<script>
+		var ws;
+		
+		function log(text) {
+			obj = document.getElementById("log");
+			obj.innerText += text + "\n";
+		}
+		
+		function send(msg) {
+			ws.send(msg);
+			log("Message sent: " + msg);
+		}
+		
+		function connect() {
+			log("Connecting...");
+			
+			ws = new WebSocket("ws://localhost:1020/echo", ["echo"]);
+			
+			ws.onopen = function() {
+				log("Connected to the server");
+				send("Hello");
+			}
+			
+			ws.onclose = function() {
+				log("Disconnected from the server");
+			}
+			
+			ws.onmessage = function (evt) {
+				log("Message received: " + evt.data);
+			}
+		}
+	</script>
+</head>
+<body>
+	<button onclick="connect()">Connect</button>
+	<button onclick="send('Echo')">Send echo</button>
+	<pre id="log"></pre>
+</body>
+</html>
